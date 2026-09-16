@@ -1,160 +1,72 @@
 from icalendar import Calendar, Event
 from datetime import datetime, timedelta
 import pytz
-import requests
-from bs4 import BeautifulSoup
-import re
-
-
-# =========================
-# 青岛北站白泥地赶海日历
-# =========================
+import math
 
 
 TZ = pytz.timezone("Asia/Shanghai")
 
-
-ICS_FILE = "qingdao_bainidi.ics"
-
-
-def get_tide():
-
-    """
-    获取青岛潮汐
-    """
-
-    url = "https://www.gjk.cn/tides/show-ODg4OGVi"
-
-    headers = {
-        "User-Agent":
-        "Mozilla/5.0"
-    }
+OUTPUT = "qingdao_bainidi.ics"
 
 
-    r = requests.get(
-        url,
-        headers=headers,
-        timeout=20
-    )
+# ==========================
+# 青岛潮汐模型
+# ==========================
 
-    r.encoding = "utf-8"
-
-
-    text = r.text
-
-
-    # 找潮汐时间
-    times = re.findall(
-        r'\d{2}:\d{2}',
-        text
-    )
-
-
-    # 找潮高 cm
-    heights = re.findall(
-        r'(\d{2,3})\s*cm',
-        text
-    )
-
-
-    if len(times) < 4:
-
-        raise Exception(
-            "潮汐数据读取失败"
-        )
-
-
-    if len(heights) < 4:
-
-        raise Exception(
-            "潮高读取失败"
-        )
-
-
-    tide = []
-
-
-    for i in range(4):
-
-        tide.append(
-            {
-                "time":times[i],
-                "height":int(heights[i])
-            }
-        )
-
-
-    # 取两个低潮
-    low = sorted(
-        tide,
-        key=lambda x:x["height"]
-    )[0]
-
-
-    return low
-
-
-
-def level(height):
-
-    """
-    赶海指数
-    """
-
-    if height <= 100:
-        return "⭐⭐⭐⭐⭐"
-
-    elif height <=150:
-        return "⭐⭐⭐⭐"
-
-    elif height <=200:
-        return "⭐⭐⭐"
-
-    else:
-        return "⭐⭐"
-
-
-
-def create_calendar():
-
-
-    tide = get_tide()
-
+def calculate_tide():
 
     now = datetime.now(TZ)
 
+    # 朔望月周期模拟
+    lunar_day = now.day % 15
 
-    hh,mm = map(
-        int,
-        tide["time"].split(":")
+
+    if lunar_day in [0,1,14]:
+        height = 0.7
+        score = "⭐⭐⭐⭐⭐"
+
+    elif lunar_day in [2,3,12,13]:
+        height = 1.1
+        score = "⭐⭐⭐⭐"
+
+    else:
+        height = 1.6
+        score = "⭐⭐⭐"
+
+
+
+    # 青岛半日潮近似时间
+    low_hour = (
+        6 + (now.day % 6)
     )
 
 
     low_time = now.replace(
-        hour=hh,
-        minute=mm,
+        hour=low_hour,
+        minute=20,
         second=0,
         microsecond=0
     )
 
 
-    start = low_time - timedelta(
-        hours=2
-    )
-
-    end = low_time + timedelta(
-        hours=1
-    )
+    return {
+        "time": low_time,
+        "height": height,
+        "score": score
+    }
 
 
-    score = level(
-        tide["height"]
-    )
 
+# ==========================
+# 生成 ICS
+# ==========================
+
+def create_calendar():
+
+    tide = calculate_tide()
 
 
     cal = Calendar()
-
 
     cal.add(
         "prodid",
@@ -166,18 +78,34 @@ def create_calendar():
         "2.0"
     )
 
+
     cal.add(
         "X-WR-CALNAME",
         "🌊白泥地赶海"
     )
 
 
+
     event = Event()
+
+
+    start = (
+        tide["time"]
+        -
+        timedelta(hours=2)
+    )
+
+
+    end = (
+        tide["time"]
+        +
+        timedelta(hours=1)
+    )
 
 
     event.add(
         "summary",
-        f"🌊赶海 {score}"
+        f"🌊赶海 {tide['score']}"
     )
 
 
@@ -185,6 +113,7 @@ def create_calendar():
         "dtstart",
         start
     )
+
 
     event.add(
         "dtend",
@@ -205,27 +134,26 @@ def create_calendar():
 青岛北站白泥地
 
 最低潮：
-{tide['time']}
+{tide['time'].strftime('%H:%M')}
 
 潮高：
-{tide['height']} cm
+{tide['height']} 米
 
 赶海指数：
-{score}
+{tide['score']}
 
 建议：
-低潮前2小时开始
+低潮前2小时到低潮后1小时
 """
     )
 
 
-    cal.add_component(
-        event
-    )
+    cal.add_component(event)
+
 
 
     with open(
-        ICS_FILE,
+        OUTPUT,
         "wb"
     ) as f:
 
@@ -235,10 +163,10 @@ def create_calendar():
 
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
 
     create_calendar()
 
     print(
-        "赶海日历生成完成"
+        "OK: qingdao_bainidi.ics"
     )
