@@ -1,2 +1,4 @@
 icalendar
 pytz
+requests
+beautifulsoup4
