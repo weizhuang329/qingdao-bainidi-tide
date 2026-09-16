@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+青岛北站白泥地赶海日历
+自动获取未来30天潮汐，生成 tide.ics。
+"""
+
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -13,76 +18,88 @@ DAYS = 30
 TZ = timezone(timedelta(hours=8))
 API = "https://api.openwaters.io/tides/extremes"
 
-def fetch():
+def parse_time(value):
+    if value is None:
+        return None
+    try:
+        text = str(value).replace("Z", "+00:00")
+        dt = datetime.fromisoformat(text)
+        return dt.replace(tzinfo=TZ) if dt.tzinfo is None else dt.astimezone(TZ)
+    except ValueError:
+        return None
+
+def number(value):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+def get_tides():
     start = datetime.now(TZ).replace(hour=0, minute=0, second=0, microsecond=0)
     end = start + timedelta(days=DAYS + 1)
-    url = API + "?" + urlencode({
-        "latitude": LATITUDE, "longitude": LONGITUDE,
-        "start": start.isoformat(), "end": end.isoformat(), "units": "meters"
-    })
-    req = Request(url, headers={"User-Agent": "qingdao-bainidi-calendar/2.0"})
-    with urlopen(req, timeout=30) as r:
-        if r.status != 200:
-            raise RuntimeError(f"API HTTP {r.status}")
-        return json.loads(r.read().decode("utf-8"))
+    params = {
+        "latitude": LATITUDE,
+        "longitude": LONGITUDE,
+        "start": start.isoformat(),
+        "end": end.isoformat(),
+        "units": "meters",
+    }
+    url = API + "?" + urlencode(params)
+    req = Request(url, headers={"User-Agent": "qingdao-bainidi-calendar/3.0"})
+    with urlopen(req, timeout=30) as response:
+        raw = response.read().decode("utf-8")
+        if response.status != 200:
+            raise RuntimeError(f"潮汐 API HTTP {response.status}: {raw[:500]}")
+    data = json.loads(raw)
 
-def dt_parse(v):
-    if not v: return None
-    s = str(v).replace("Z", "+00:00")
-    try: d = datetime.fromisoformat(s)
-    except ValueError: return None
-    return d.replace(tzinfo=TZ) if d.tzinfo is None else d.astimezone(TZ)
-
-def scan(x):
-    out = []
-    if isinstance(x, list):
-        for y in x: out += scan(y)
-    elif isinstance(x, dict):
-        tv = next((x[k] for k in ("time","timestamp","datetime","dateTime","date") if k in x), None)
-        kind = next((str(x[k]).lower() for k in ("type","event","tideType","kind","name") if k in x), "")
-        height = None
-        for k in ("height","level","waterLevel","value"):
-            if k in x:
-                try: height = float(x[k])
-                except (TypeError, ValueError): pass
-                break
-        d = dt_parse(tv)
-        if d and kind: out.append((d, kind, height))
-        else:
-            for v in x.values():
-                if isinstance(v, (dict,list)): out += scan(v)
-    return out
+    # Open Waters 实际常见格式：
+    # {"extremes":[{"time":"...","type":"HIGH/LOW","height":...}]}
+    candidates = data.get("extremes", []) if isinstance(data, dict) else data
+    result = []
+    for item in candidates or []:
+        if not isinstance(item, dict):
+            continue
+        dt = parse_time(item.get("time") or item.get("datetime"))
+        kind = str(item.get("type") or item.get("event") or "").upper()
+        height = number(item.get("height", item.get("waterLevel")))
+        if dt and kind in ("LOW", "LOWTIDE", "EBB"):
+            if start <= dt < end:
+                result.append((dt, height))
+    return sorted(result, key=lambda x: x[0])
 
 def main():
     now = datetime.now(TZ)
-    start = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    data = fetch()
-    tides = sorted(scan(data), key=lambda z: z[0])
+    lows = get_tides()
+    if not lows:
+        raise RuntimeError("API 没有返回 LOW 低潮数据；请展开 Actions 日志查看 API 原始返回。")
+
     cal = Calendar()
     cal.add("prodid", "-//Qingdao Bainidi Tide Calendar//CN")
     cal.add("version", "2.0")
     cal.add("calscale", "GREGORIAN")
     cal.add("X-WR-CALNAME", "青岛北站白泥地赶海")
     cal.add("X-WR-TIMEZONE", "Asia/Shanghai")
-    count = 0
-    for d, kind, height in tides:
-        if not any(w in kind for w in ("low","ebb","低","低潮")): continue
-        if not (start <= d < start + timedelta(days=DAYS + 1)): continue
-        e = Event()
-        e.add("uid", f"bainidi-{d:%Y%m%d%H%M}@calendar.local")
-        e.add("dtstamp", now)
-        e.add("dtstart", d - timedelta(hours=2))
-        e.add("dtend", d + timedelta(hours=1))
-        e.add("summary", f"🌊赶海 {d:%H:%M}")
-        e.add("description", f"地点：青岛北站白泥地\n低潮：{d:%Y-%m-%d %H:%M}\n潮高：{height if height is not None else '未知'}m\n建议时段：低潮前2小时至低潮后1小时")
-        e.add("location", "青岛北站白泥地")
-        e.add("transp", "OPAQUE")
-        a = Alarm()
-        a.add("action","DISPLAY"); a.add("description", "🌊赶海提醒"); a.add("trigger", timedelta(hours=-3))
-        e.add_component(a)
-        cal.add_component(e); count += 1
-    if count == 0: raise RuntimeError("没有解析到低潮数据，请查看 Actions 日志。")
-    Path("tide.ics").write_bytes(cal.to_ical())
-    print(f"生成 tide.ics：{count} 个事件")
 
-if __name__ == "__main__": main()
+    for dt, height in lows:
+        event = Event()
+        event.add("uid", f"bainidi-low-{dt:%Y%m%d%H%M}@calendar.local")
+        event.add("dtstamp", now)
+        event.add("dtstart", dt - timedelta(hours=2))
+        event.add("dtend", dt + timedelta(hours=1))
+        event.add("summary", f"🌊赶海 {dt:%H:%M}")
+        h = f"{height:.2f}m" if height is not None else "未知"
+        event.add("description", f"地点：青岛北站白泥地\n低潮：{dt:%Y-%m-%d %H:%M}\n潮高：{h}\n建议时段：低潮前2小时至低潮后1小时")
+        event.add("location", "青岛北站白泥地")
+        event.add("transp", "OPAQUE")
+        alarm = Alarm()
+        alarm.add("action", "DISPLAY")
+        alarm.add("description", "🌊赶海提醒")
+        alarm.add("trigger", timedelta(hours=-3))
+        event.add_component(alarm)
+        cal.add_component(event)
+
+    Path("tide.ics").write_bytes(cal.to_ical())
+    print(f"成功生成 tide.ics，共 {len(lows)} 个低潮事件。")
+
+if __name__ == "__main__":
+    main()
