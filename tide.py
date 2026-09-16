@@ -60,9 +60,15 @@ def get_tides():
         if not isinstance(item, dict):
             continue
         dt = parse_time(item.get("time") or item.get("datetime"))
-        kind = str(item.get("type") or item.get("event") or "").upper()
-        height = number(item.get("height", item.get("waterLevel")))
-        if dt and kind in ("LOW", "LOWTIDE", "EBB"):
+        kind = str(item.get("type") or item.get("event") or item.get("label") or "").upper()
+        # Open Waters / Neaps 当前返回格式使用 low/high 布尔字段，水位字段叫 level
+        is_low = (
+            item.get("low") is True
+            or kind in ("LOW", "LOWTIDE", "EBB")
+            or kind.startswith("LOW")
+        )
+        height = number(item.get("height", item.get("level", item.get("waterLevel"))))
+        if dt and is_low:
             if start <= dt < end:
                 result.append((dt, height))
     return sorted(result, key=lambda x: x[0])
@@ -71,7 +77,10 @@ def main():
     now = datetime.now(TZ)
     lows = get_tides()
     if not lows:
-        raise RuntimeError("API 没有返回 LOW 低潮数据；请展开 Actions 日志查看 API 原始返回。")
+        raise RuntimeError(
+            "API 没有解析到低潮数据。请检查 Actions 中 API 原始返回；"
+            "当前接口格式应使用 low=true、time、level 字段。"
+        )
 
     cal = Calendar()
     cal.add("prodid", "-//Qingdao Bainidi Tide Calendar//CN")
