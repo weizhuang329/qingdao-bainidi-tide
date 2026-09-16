@@ -1,4 +1,1 @@
-icalendar
-pytz
-requests
-beautifulsoup4
+icalendar>=6.1.0
