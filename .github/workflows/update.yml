@@ -1,4 +1,4 @@
-name: update tide
+name: update tide calendar
 
 on:
   schedule:
@@ -6,26 +6,46 @@ on:
 
   workflow_dispatch:
 
+
+permissions:
+  contents: write
+
+
 jobs:
+
   build:
 
     runs-on: ubuntu-latest
 
+
     steps:
 
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
-    - uses: actions/setup-python@v5
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
       with:
         python-version: "3.x"
 
-    - run:
+
+    - name: Install
+      run: |
         pip install -r requirements.txt
 
-    - run:
+
+    - name: Generate ICS
+      run: |
         python tide.py
 
-    - run:
+
+    - name: Save
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "actions@github.com"
         git add .
-        git commit -m "update tide"
+        git commit -m "update tide" || exit 0
         git push
