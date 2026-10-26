@@ -6,44 +6,12 @@ X-WR-CALNAME:青岛赶海潮汐
 X-WR-TIMEZONE:Asia/Shanghai
 BEGIN:VEVENT
 SUMMARY:赶海 11:00
-DTSTART;TZID=Asia/Shanghai:20261026T090000
-DTEND;TZID=Asia/Shanghai:20261026T120000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610261100--144@calendar.local
-DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-26 
- 11:00\\n潮高估算：-1.44 米\\n建议：低潮前约2小时到低潮
- 后约1小时；请注意泥滩湿滑和现场安全。
-LOCATION:青岛北站白泥地公园
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:赶海提醒
-TRIGGER:-PT3H
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:赶海 23:00
-DTSTART;TZID=Asia/Shanghai:20261026T210000
-DTEND;TZID=Asia/Shanghai:20261027T000000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610262300--107@calendar.local
-DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-26 
- 23:00\\n潮高估算：-1.07 米\\n建议：低潮前约2小时到低潮
- 后约1小时；请注意泥滩湿滑和现场安全。
-LOCATION:青岛北站白泥地公园
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:赶海提醒
-TRIGGER:-PT3H
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:赶海 11:00
 DTSTART;TZID=Asia/Shanghai:20261027T090000
 DTEND;TZID=Asia/Shanghai:20261027T120000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610271100--176@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610271100--181@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-27 
- 11:00\\n潮高估算：-1.76 米\\n建议：低潮前约2小时到低潮
+ 11:00\\n潮高估算：-1.81 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -56,10 +24,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 00:00
 DTSTART;TZID=Asia/Shanghai:20261027T220000
 DTEND;TZID=Asia/Shanghai:20261028T010000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610280000--130@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610280000--136@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-28 
- 00:00\\n潮高估算：-1.30 米\\n建议：低潮前约2小时到低潮
+ 00:00\\n潮高估算：-1.36 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -72,10 +40,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 12:00
 DTSTART;TZID=Asia/Shanghai:20261028T100000
 DTEND;TZID=Asia/Shanghai:20261028T130000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610281200--217@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610281200--213@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-28 
- 12:00\\n潮高估算：-2.17 米\\n建议：低潮前约2小时到低潮
+ 12:00\\n潮高估算：-2.13 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -88,10 +56,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 01:00
 DTSTART;TZID=Asia/Shanghai:20261028T230000
 DTEND;TZID=Asia/Shanghai:20261029T020000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610290100--105@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610290100--102@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-29 
- 01:00\\n潮高估算：-1.05 米\\n建议：低潮前约2小时到低潮
+ 01:00\\n潮高估算：-1.02 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -104,10 +72,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 13:00
 DTSTART;TZID=Asia/Shanghai:20261029T110000
 DTEND;TZID=Asia/Shanghai:20261029T140000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610291300--170@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610291300--163@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-29 
- 13:00\\n潮高估算：-1.70 米\\n建议：低潮前约2小时到低潮
+ 13:00\\n潮高估算：-1.63 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -120,10 +88,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 01:00
 DTSTART;TZID=Asia/Shanghai:20261029T230000
 DTEND;TZID=Asia/Shanghai:20261030T020000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610300100--71@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610300100--75@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-30 
- 01:00\\n潮高估算：-0.71 米\\n建议：低潮前约2小时到低潮
+ 01:00\\n潮高估算：-0.75 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -136,10 +104,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 13:00
 DTSTART;TZID=Asia/Shanghai:20261030T110000
 DTEND;TZID=Asia/Shanghai:20261030T140000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610301300--182@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610301300--176@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-30 
- 13:00\\n潮高估算：-1.82 米\\n建议：低潮前约2小时到低潮
+ 13:00\\n潮高估算：-1.76 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -152,10 +120,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 02:00
 DTSTART;TZID=Asia/Shanghai:20261031T000000
 DTEND;TZID=Asia/Shanghai:20261031T030000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610310200--57@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610310200--63@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-31 
- 02:00\\n潮高估算：-0.57 米\\n建议：低潮前约2小时到低潮
+ 02:00\\n潮高估算：-0.63 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -168,10 +136,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 14:00
 DTSTART;TZID=Asia/Shanghai:20261031T120000
 DTEND;TZID=Asia/Shanghai:20261031T150000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202610311400--181@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202610311400--166@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-10-31 
- 14:00\\n潮高估算：-1.81 米\\n建议：低潮前约2小时到低潮
+ 14:00\\n潮高估算：-1.66 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -184,10 +152,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 03:00
 DTSTART;TZID=Asia/Shanghai:20261101T010000
 DTEND;TZID=Asia/Shanghai:20261101T040000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202611010300--61@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202611010300--41@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-01 
- 03:00\\n潮高估算：-0.61 米\\n建议：低潮前约2小时到低潮
+ 03:00\\n潮高估算：-0.41 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -200,7 +168,7 @@ BEGIN:VEVENT
 SUMMARY:赶海 15:00
 DTSTART;TZID=Asia/Shanghai:20261101T130000
 DTEND;TZID=Asia/Shanghai:20261101T160000
-DTSTAMP:20261025T185827Z
+DTSTAMP:20261026T205932Z
 UID:qingdao-bainidi-202611011500--145@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-01 
  15:00\\n潮高估算：-1.45 米\\n建议：低潮前约2小时到低潮
@@ -216,10 +184,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 04:00
 DTSTART;TZID=Asia/Shanghai:20261102T020000
 DTEND;TZID=Asia/Shanghai:20261102T050000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202611020400--47@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202611020400--51@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-02 
- 04:00\\n潮高估算：-0.47 米\\n建议：低潮前约2小时到低潮
+ 04:00\\n潮高估算：-0.51 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -232,10 +200,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 17:00
 DTSTART;TZID=Asia/Shanghai:20261102T150000
 DTEND;TZID=Asia/Shanghai:20261102T180000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202611021700--142@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202611021700--168@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-02 
- 17:00\\n潮高估算：-1.42 米\\n建议：低潮前约2小时到低潮
+ 17:00\\n潮高估算：-1.68 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -248,10 +216,10 @@ BEGIN:VEVENT
 SUMMARY:赶海 06:00
 DTSTART;TZID=Asia/Shanghai:20261103T040000
 DTEND;TZID=Asia/Shanghai:20261103T070000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202611030600--62@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202611030600--89@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-03 
- 06:00\\n潮高估算：-0.62 米\\n建议：低潮前约2小时到低潮
+ 06:00\\n潮高估算：-0.89 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
@@ -264,10 +232,42 @@ BEGIN:VEVENT
 SUMMARY:赶海 18:00
 DTSTART;TZID=Asia/Shanghai:20261103T160000
 DTEND;TZID=Asia/Shanghai:20261103T190000
-DTSTAMP:20261025T185827Z
-UID:qingdao-bainidi-202611031800--152@calendar.local
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202611031800--142@calendar.local
 DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-03 
- 18:00\\n潮高估算：-1.52 米\\n建议：低潮前约2小时到低潮
+ 18:00\\n潮高估算：-1.42 米\\n建议：低潮前约2小时到低潮
+ 后约1小时；请注意泥滩湿滑和现场安全。
+LOCATION:青岛北站白泥地公园
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:赶海提醒
+TRIGGER:-PT3H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:赶海 07:00
+DTSTART;TZID=Asia/Shanghai:20261104T050000
+DTEND;TZID=Asia/Shanghai:20261104T080000
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202611040700--69@calendar.local
+DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-04 
+ 07:00\\n潮高估算：-0.69 米\\n建议：低潮前约2小时到低潮
+ 后约1小时；请注意泥滩湿滑和现场安全。
+LOCATION:青岛北站白泥地公园
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:赶海提醒
+TRIGGER:-PT3H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:赶海 19:00
+DTSTART;TZID=Asia/Shanghai:20261104T170000
+DTEND;TZID=Asia/Shanghai:20261104T200000
+DTSTAMP:20261026T205932Z
+UID:qingdao-bainidi-202611041900--139@calendar.local
+DESCRIPTION:地点：青岛北站白泥地公园\\n最低潮：2026-11-04 
+ 19:00\\n潮高估算：-1.39 米\\n建议：低潮前约2小时到低潮
  后约1小时；请注意泥滩湿滑和现场安全。
 LOCATION:青岛北站白泥地公园
 BEGIN:VALARM
